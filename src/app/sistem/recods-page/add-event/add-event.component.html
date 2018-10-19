@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="card-header bordered">
+        <div class="header-block">
+            <h3 class="title">Добавить событие</h3>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="alert alert-{{massage.type}}"  *ngIf="massage.text">
+            {{massage.text}}
+        </div>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div class="form-group">
+                <label class="control-label" for="category">Выберите категорию</label>
+                <select 
+                 class="form-control" id="category"
+                 required
+                 ngModel="1" 
+                 name='category'
+                  >
+                    <option *ngFor="let item of categoryes" [value]='item.id' >{{item.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Выберите тип</label>
+                <div *ngFor="let t of types">
+                    <label>
+                        <input 
+                         class="radio"
+                         name="type" 
+                         type="radio"
+                         checked="checked"
+                         [value]="t.type"
+                         [ngModel]="'outcome'"
+                        >
+                        <span>{{t.label}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{'hes-error': amount.invalid && amount.touched}">
+                <label class="control-label" for="amount">Введите сумму</label>
+                <input 
+                type="number"
+                 ngModel= '1'
+                 name= 'amount'
+                 id="amount"
+                 min='1'
+                 required
+                 class="form-control"
+                 #amount= "ngModel"
+                 >
+                 <span *ngIf="amount.invalid && amount.touched" class="form-help-text">shuld be some value</span>
+            </div>
+
+            <div class="form-group" [ngClass]="{'has-error': discription.invalid && discription.touched}">
+                    <label class="control-label" for="discription">add what you do </label>
+                    <input 
+                    type="text"
+                     ngModel
+                     name= 'discription'discription
+                     id="discription"
+                     required 
+                     class="form-control"
+                     #discription= "ngModel"
+                     >
+                     <span *ngIf="discription.invalid && discription.touched" class="form-help-text">shuld be some value</span>
+                </div>
+            <button type="submit" [disabled]='f.invalid' class="btn btn-primary">Добавить</button>
+        </form>
+    </div>
+</div>
+ 

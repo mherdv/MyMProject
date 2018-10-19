@@ -1,0 +1,29 @@
+<div class="title-block">
+  <h3 class="title">
+      Страница записей <span class="sparkline bar"></span>
+  </h3>
+</div>
+<section
+    *ngIf="!isLoaded"
+ class="section text-center"
+> ...loading  </section>
+
+<section
+    *ngIf="isLoaded"
+ class="section"
+>
+  <div class="row">
+      <div class="col-md-6">
+         <MyM-add-event [categoryes]="categoryes"></MyM-add-event>
+      </div>
+      <div class="col-md-6">
+            <MyM-add-category (onCategoryAdd)='newCategoryAdded($event)'></MyM-add-category>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-6">
+            <MyM-eddit-category [categoryes]="categoryes" (onCategoryEdit)="categoryWasEdited($event)"></MyM-eddit-category>
+      </div>
+  </div>
+</section>
+ 

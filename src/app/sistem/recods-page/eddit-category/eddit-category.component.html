@@ -1,0 +1,54 @@
+<div class="card">
+    <div class="card-header bordered">
+        <div class="header-block">
+            <h3 class="title">redact category</h3>
+        </div>
+    </div>
+    <div class="card-block">
+        <div
+        *ngIf="message.text"
+         class="alert alert-{{message.type}}">{{message.text}}</div>
+        <form #f="ngForm" (ngSubmit)='onSubmit(f)'>
+            <div class="form-group">
+                <label class="control-label" for="e-select-category">chuse category</label>
+                <select 
+                class="form-control" id="e-select-category" 
+                [(ngModel)]="currentCategoryId"
+                (change)="onCaegoryChange()"
+                [ngModelOptions]="{standalone: true}">
+                    <option 
+                        *ngFor="let item of categoryes" [value]='item.id'>
+                        {{item.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group " [ngClass]="{'has-error': name.invalid && name.touched}">
+                <label class="control-label" for="e-category-name">Введите название</label>
+                
+                <input 
+                #name="ngModel"
+                name="name"
+                [ngModel]= "currentCategory.name"
+                required
+                type="text" id="e-category-name"
+                 class="form-control">
+
+                <span *ngIf="name.invalid && name.touched" class="form-help-text">empty cotegory name</span>
+            </div>
+            <div class="form-group " [ngClass]="{'has-error': capacity.invalid && capacity.touched}">
+                <label class="control-label" for="e-category-value">Введите лимит</label>
+                <input 
+                #capacity="ngModel"
+                name="capacity"
+                required
+                [ngModel]="currentCategory.capacity"
+                min="1"
+                type="number" 
+                 id="e-category-value" class="form-control">
+                <span *ngIf="capacity.invalid && capacity.touched" class="form-help-text">Валидация нет ошибки</span>
+            </div>
+            <button type="submit" [disabled]='!f.valid' class="btn btn-primary">redact</button>
+        </form>
+    </div>
+</div>

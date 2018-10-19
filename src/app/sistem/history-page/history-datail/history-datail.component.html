@@ -1,0 +1,35 @@
+
+      <!--CONTENT-->
+      
+
+      <div *ngIf="!isLoadet">...Loading</div>
+      <div *ngIf="isLoadet">
+          <div class="title-block">
+              <h3 class="title">
+                  <a [routerLink]="['/sistem/history']"><i class="fa fa-arrow-left"></i></a>
+                  Страница записи № {{events.id}}
+                  <span class="sparkline bar"></span>
+              </h3>
+          </div>
+          <section class="section">
+              <div class="row">
+                  <div class="col-xs-6 col-xs-offset-3">
+                      <div class="card card-{{events.type === 'income' ? 'success' : 'danger' }}">
+                          <div class="card-header">
+                              <div class="header-block">
+                                  <p class="title">{{events.type === 'income' ? 'comming' : 'going' }}</p>
+                              </div>
+                          </div>
+                          <div class="card-block">
+                              <ul>
+                                  <li>Сумма: <strong>{{events.amount | number:'1.2'}}</strong></li>
+                                  <li>Категория: <strong>{{category.name}}</strong></li>
+                              </ul>
+                          </div>
+                          <div class="card-footer">{{events.date | MyMMoment:"DD.MM.YYYY"}}</div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </div>
+      <!--CONTENT-->

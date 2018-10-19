@@ -1,0 +1,41 @@
+<p class="text-xs-center">Войдите для работы</p>
+<div 
+*ngIf="massage.text != '' "
+class="alert alert-{{massage.type}}">{{massage.text}}</div>
+<form [formGroup]='formLogin' (ngSubmit)="onSubmit()">
+    <div class="form-group" [ngClass]="{'has-error': formLogin.get('email').invalid && formLogin.get('email').touched}">
+        <label for="email">Email</label>
+        <input type="text" formControlName="email" class="form-control underlined" id="email" placeholder="Введите ваш email">
+        <span class="form-help-text" *ngIf="formLogin.get('email').invalid && formLogin.get('email').touched ">
+            error
+            <span *ngIf="formLogin.get('email')['errors']['required']">Email shuldnot be eempty</span>
+            <span *ngIf="formLogin.get('email')['errors']['email']">Email is invalid</span>
+        </span>
+    </div>
+    
+
+
+    <div class="form-group" [ngClass]="{'has-error': formLogin.get('password').invalid && formLogin.get('password').touched}">
+        <label for="password">Пароль</label>
+        <input type="password" formControlName='password' class="form-control underlined" id="password" placeholder="Пароль">
+        
+        <span class="form-help-text" *ngIf="formLogin.get('password').invalid && formLogin.get('password').touched ">
+            error
+            <span *ngIf="formLogin.get('password')['errors']['required']">password shuldnot be eempty</span>
+            <span *ngIf="formLogin.get('password')['errors']['minlength'] && regForm.get('password')['errors']['minlength']['requiredLength']">
+                password shud be biger then {{formLogin.get('password')['errors']['minlength']['requiredLength']}}
+                 sinbols</span>
+        </span>
+    
+    </div>
+
+
+    <div class="form-group">
+        <button type="submit" [disabled]="formLogin.invalid" class="btn btn-block btn-primary">Войти</button>
+    </div>
+    <div class="form-group">
+        <p class="text-muted text-xs-center">
+            Нет аккаунта? <a routerLink="/registration">Зарегистрироваться!</a>
+        </p>
+    </div>
+</form>
